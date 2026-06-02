@@ -9,7 +9,13 @@
     >
       Events
     </RouterLink>
-    <router-link to="/admin/programs"> Programs </router-link>
+    <router-link 
+      to="/admin/programs"
+      class="block p-2 rounded"
+      active-class="bg-gray-800"
+    > 
+      Programs 
+    </router-link>
 
     <router-link to="/admin/resources"> Resources </router-link>
 

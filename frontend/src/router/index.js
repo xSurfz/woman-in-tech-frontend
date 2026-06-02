@@ -13,6 +13,7 @@ import { useAuthStore } from "../stores/auth.js";
 import AdminEvents from "../pages/admin/Events.vue";
 import Layout from "../layouts/Layout.vue";
 import AdminLayout from "../layouts/AdminLayout.vue";
+import AdminPrograms from "../pages/admin/Programs.vue";
 const routes = [
   {
     path: "/",
@@ -41,6 +42,7 @@ const routes = [
     children: [
       { path: "", component: Dashboard },
       { path: "events", component: AdminEvents },
+      { path: "programs", component: AdminPrograms }
     ],
   },
 ];
