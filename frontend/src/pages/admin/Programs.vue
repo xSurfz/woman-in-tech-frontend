@@ -26,10 +26,13 @@ const editingProgramId = ref(null);
 const isSubmitting = ref(false);
 const showDeleteModal = ref(false);
 const programToDelete = ref(null);
+const formError = ref("");
+const formSuccess = ref("");
 
 async function submit() {
   const formData = new FormData();
-
+  formError.value = "";
+  formSuccess.value = "";
   isSubmitting.value = true;
 
   try {
@@ -57,19 +60,30 @@ async function submit() {
     }
 
     await load();
-  } finally {
+
+    formSuccess.value = editingResourceId.value
+      ? "Resource updated successfully."
+      : "Resource created successfully."; 
+      
     form.value = {
-      title: "",
-      description: "",
-      actionText: "",
-      actionUrl: "",
-      sortOrder: 0,
-      isFeatured: false,
+    title: "",
+    description: "",
+    actionText: "",
+    actionUrl: "",
+    sortOrder: 0,
+    isFeatured: false,
     };
 
     file.value = null;
     preview.value = null;
     editingProgramId.value = null;
+    } catch (error) {
+    console.error(error);
+
+    formError.value =
+      error.response?.data?.error?.message ??
+      "Unexpected error";
+  } finally {
     isSubmitting.value = false;
   }
 }
@@ -95,11 +109,13 @@ async function confirmDelete() {
   try {
     await handleDelete(programToDelete.value.id);
 
-    toast.success("Program deleted successfully");
-
     await load();
   } catch (error) {
-    toast.error("Failed to delete program");
+    console.error(error.response?.data);
+
+    formError.value =
+      error.response?.data?.error?.message ??
+      "Unexpected error";
   } finally {
     showDeleteModal.value = false;
     programToDelete.value = null;
@@ -143,6 +159,19 @@ onMounted(load);
 </script>
 
 <template>
+    <div
+        v-if="formSuccess"
+        class="mb-4 p-3 rounded-lg bg-green-50 text-green-700"
+    >
+        {{ formSuccess }}
+    </div>
+
+    <div
+        v-if="formError"
+        class="mb-4 p-3 rounded-lg bg-red-50 text-red-700"
+    >
+        {{ formError }}
+    </div>
     <div class="max-w-7xl mx-auto p-6">
         <h1 class="text-2xl font-bold mb-2">
             Programs
@@ -335,7 +364,7 @@ onMounted(load);
                             </button>
 
                             <button
-                                @click="openDeleteModal(program.id)"
+                                @click="openDeleteModal(program)"
                                 class="px-3 py-2 rounded-lg bg-red-600 text-white"
                             >
                                 Delete
