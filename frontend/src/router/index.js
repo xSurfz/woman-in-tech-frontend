@@ -60,23 +60,21 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
 });
+
 router.beforeEach(async (to) => {
-  console.log("route", to.path);
-
-  if (!to.meta.requiresAuth) {
-    return true;
-  }
-
   const auth = useAuthStore();
 
   await auth.fetchUser();
 
-  console.log("user", auth.user);
+  if (to.meta.guestOnly && auth.user) {
+    return "/admin";
+  }
 
-  if (!auth.user) {
+  if (to.meta.requiresAuth && !auth.user) {
     return "/admin/login";
   }
 
   return true;
 });
+
 export default router;

@@ -1,9 +1,25 @@
+<script setup>
+import { useRouter } from "vue-router";
+import { logout } from "../services/auth.service";
+
+const router = useRouter();
+
+async function handleLogout() {
+  try {
+    await logout();
+
+    router.push("/admin/login");
+  } catch (error) {
+    console.error(error);
+  }
+}
+</script>
 <template>
   <div class="min-h-screen flex bg-gray-100">
-    <aside class="w-64 bg-gray-900 text-white p-4">
+    <aside class="w-64 bg-gray-900 text-white p-4 flex flex-col">
       <h1 class="text-xl font-bold mb-6">Admin Panel</h1>
 
-      <nav class="space-y-2">
+      <nav class="space-y-2 flex-1">
         <router-link 
           to="/admin"
           class="block p-2 rounded"
@@ -60,8 +76,13 @@
           Members 
         </router-link>
       </nav>
+      <button 
+        @click="handleLogout" 
+        class="mt auto w-full text-left bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded"
+      >
+        Logout
+      </button>
     </aside>
-    <!-- MAIN -->
     <main class="flex-1 p-6">
       <router-view />
     </main>
