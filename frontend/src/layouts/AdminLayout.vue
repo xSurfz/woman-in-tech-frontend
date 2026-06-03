@@ -51,6 +51,14 @@
         > 
           Interests 
         </router-link>
+
+        <router-link 
+          to="/admin/members"
+          class="block p-2 rounded"
+          active-class="bg-gray-800"
+        > 
+          Members 
+        </router-link>
       </nav>
     </aside>
     <!-- MAIN -->

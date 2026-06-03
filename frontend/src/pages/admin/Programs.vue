@@ -318,41 +318,41 @@ onMounted(load);
 
                 <div class="overflow-x-auto">
                     <table class="w-full">
-                    <thead class="bg-gray-50">
-                        <tr>
-                        <th class="text-left p-4">Image</th>
-                        <th class="text-left p-4">Title</th>
-                        <th class="text-left p-4">Featured</th>
-                        <th class="text-left p-4">Order</th>
-                        <th class="text-right p-4">Actions</th>
-                        </tr>
-                    </thead>
+                        <thead class="bg-gray-50">
+                            <tr>
+                            <th class="text-left p-4">Image</th>
+                            <th class="text-left p-4">Title</th>
+                            <th class="text-left p-4">Featured</th>
+                            <th class="text-left p-4">Order</th>
+                            <th class="text-right p-4">Actions</th>
+                            </tr>
+                        </thead>
 
-                    <tbody>
-                        <tr
-                        v-for="program in programs"
-                        :key="program.id"
-                        class="border-t"
-                        >
-                        <td class="p-4">
-                            <img
-                            v-if="program.imageUrl"
-                            :src="getFileUrl(program.imageUrl)"
-                            class="w-16 h-16 rounded-lg object-cover"
-                            />
-                        </td>
+                        <tbody>
+                            <tr
+                                v-for="program in programs"
+                                :key="program.id"
+                                class="border-t"
+                            >
+                            <td class="p-4">
+                                <img
+                                    v-if="program.imageUrl"
+                                    :src="getFileUrl(program.imageUrl)"
+                                    class="w-16 h-16 rounded-lg object-cover"
+                                />
+                            </td>
 
-                        <td class="p-4 font-medium">
-                            {{ program.title }}
-                        </td>
+                            <td class="p-4 font-medium">
+                                {{ program.title }}
+                            </td>
 
-                        <td class="p-4">
-                            {{ program.isFeatured ? "⭐ Yes" : "No" }}
-                        </td>
+                            <td class="p-4">
+                                {{ program.isFeatured ? "⭐ Yes" : "No" }}
+                            </td>
 
-                        <td class="p-4">
-                            {{ program.sortOrder }}
-                        </td>
+                            <td class="p-4">
+                                {{ program.sortOrder }}
+                            </td>
 
                         <td class="p-4">
                             <div class="flex justify-end gap-2">

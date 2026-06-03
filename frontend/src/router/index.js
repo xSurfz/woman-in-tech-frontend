@@ -17,6 +17,7 @@ import AdminPrograms from "../pages/admin/Programs.vue";
 import AdminResources from "../pages/admin/Resources.vue";
 import AdminTestimonials from "../pages/admin/Testimonials.vue";
 import AdminInterests from "../pages/admin/Interests.vue";
+import AdminMembers from "../pages/admin/Members.vue";
 
 const routes = [
   {
@@ -50,6 +51,7 @@ const routes = [
       { path: "resources", component: AdminResources },
       { path: "testimonials", component: AdminTestimonials },
       {  path: "interests", component: AdminInterests },
+      {  path: "members", component: AdminMembers },
     ],
   },
 ];
