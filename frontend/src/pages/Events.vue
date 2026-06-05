@@ -155,7 +155,7 @@
             class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-200 hover:shadow-lg transition"
           >
             <img
-              :src="event.imageUrl"
+              :src="`${SERVER_URL}${event.imageUrl}`"
               :alt="event.title"
               class="w-full h-56 object-cover grayscale hover:grayscale-0 transition duration-300"
             />
