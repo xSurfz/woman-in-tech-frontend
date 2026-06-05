@@ -30,13 +30,43 @@ const formError = ref("");
 const formSuccess = ref("");
 
 async function submit() {
-  const formData = new FormData();
-  formError.value = "";
-  formSuccess.value = "";
-  isSubmitting.value = true;
+  if (editingProgramId.value) {
+    await update();
+  } else {
+    await create();
+  }
+}
 
-  try {
-    Object.entries(form.value).forEach(([key, value]) => {
+async function create() {
+  const formData = buildFormData();
+
+  await createProgram(formData);
+
+  formSuccess.value =
+    "Program created successfully.";
+
+  await afterSubmit();
+}
+
+async function update() {
+  const formData = buildFormData();
+
+  await updateProgram(
+    editingProgramId.value,
+    formData,
+  );
+
+  formSuccess.value =
+    "Program updated successfully.";
+
+  await afterSubmit();
+}
+
+function buildFormData() {
+  const formData = new FormData();
+
+  Object.entries(form.value).forEach(
+    ([key, value]) => {
       if (
         value !== null &&
         value !== undefined &&
@@ -44,48 +74,34 @@ async function submit() {
       ) {
         formData.append(key, value);
       }
-    });
+    },
+  );
 
-    if (file.value) {
-      formData.append("image", file.value);
-    }
+  if (file.value) {
+    formData.append(
+      "image",
+      file.value,
+    );
+  }
 
-    if (editingProgramId.value) {
-      await updateProgram(
-        editingProgramId.value,
-        formData,
-      );
-    } else {
-      await createProgram(formData);
-    }
+  return formData;
+}
 
-    await load();
+async function afterSubmit() {
+  await load();
 
-    formSuccess.value = editingResourceId.value
-      ? "Resource updated successfully."
-      : "Resource created successfully."; 
-      
-    form.value = {
+  form.value = {
     title: "",
     description: "",
     actionText: "",
     actionUrl: "",
     sortOrder: 0,
     isFeatured: false,
-    };
+  };
 
-    file.value = null;
-    preview.value = null;
-    editingProgramId.value = null;
-    } catch (error) {
-    console.error(error);
-
-    formError.value =
-      error.response?.data?.error?.message ??
-      "Unexpected error";
-  } finally {
-    isSubmitting.value = false;
-  }
+  file.value = null;
+  preview.value = null;
+  editingProgramId.value = null;
 }
 
 function getFileUrl(path) {
