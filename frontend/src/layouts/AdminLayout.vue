@@ -60,21 +60,21 @@ async function handleLogout() {
           Testimonials 
         </router-link>
 
-        <!-- <router-link 
+        <router-link 
           to="/admin/interests"
           class="block p-2 rounded"
           active-class="bg-gray-800"
         > 
           Interests 
-        </router-link> -->
+        </router-link>
 
-        <!-- <router-link 
+        <router-link 
           to="/admin/members"
           class="block p-2 rounded"
           active-class="bg-gray-800"
         > 
           Members 
-        </router-link> -->
+        </router-link>
       </nav>
       <button 
         @click="handleLogout" 
