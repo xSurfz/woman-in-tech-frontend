@@ -28,6 +28,6 @@
 
     <router-link to="/admin/testimonials"> Testimonials </router-link>
 
-    <router-link to="/admin/interests"> Interests </router-link>
+    <!-- <router-link to="/admin/interests"> Interests </router-link> -->
   </aside>
 </template>
