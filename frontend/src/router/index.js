@@ -28,7 +28,7 @@ const routes = [
       { path: "about", component: About },
       { path: "events", component: Events },
       { path: "programs", component: Programs },
-      // { path: "community", component: Community },
+      { path: "community", component: Community },
       { path: "resources", component: Resources },
       { path: "testimonials", component: Testimonials },
       { path: "contact", component: Contact },
