@@ -1,6 +1,5 @@
 <template>
   <div class="bg-gray-50 min-h-screen">
-    <!-- Hero -->
     <section
       class="bg-gradient-to-r from-purple-700 to-fuchsia-600 text-white py-20"
     >
@@ -16,7 +15,6 @@
       </div>
     </section>
 
-    <!-- Loading -->
     <div v-if="loading" class="flex flex-col items-center justify-center py-24">
       <div
         class="animate-spin rounded-full h-12 w-12 border-4 border-purple-200 border-t-purple-700"
@@ -25,9 +23,7 @@
       <p class="mt-4 text-gray-600">Cargando recursos...</p>
     </div>
 
-    <!-- Content -->
     <div v-else class="max-w-7xl mx-auto px-4 py-16">
-      <!-- Filters -->
       <section class="mb-12">
         <div class="flex flex-wrap justify-center gap-3">
           <button
@@ -46,7 +42,6 @@
         </div>
       </section>
 
-      <!-- Empty -->
       <div
         v-if="filteredResources.length === 0"
         class="bg-white border border-gray-200 rounded-2xl p-12 text-center"
@@ -56,17 +51,15 @@
         </p>
       </div>
 
-      <!-- Grid -->
       <div v-else class="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
         <article
           v-for="resource in paginatedResources"
           :key="resource.id"
           class="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col"
         >
-          <!-- Image -->
           <div class="relative">
             <img
-              :src="resource.image"
+              :src="`${SERVER_URL}${resource.imageUrl}`"
               :alt="resource.title"
               class="w-full h-56 object-cover"
             />
@@ -83,7 +76,6 @@
             </div>
           </div>
 
-          <!-- Content -->
           <div class="p-6 flex flex-col flex-grow">
             <div class="mb-4">
               <h3 class="text-2xl font-bold text-gray-900 mb-3">
@@ -95,7 +87,6 @@
               </p>
             </div>
 
-            <!-- Metadata -->
             <div class="mt-auto">
               <div class="flex items-center gap-2 text-sm text-gray-500 mb-5">
                 <component
@@ -110,7 +101,7 @@
               </div>
 
               <a
-                :href="resource.link"
+                :href="resource.url"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="w-full inline-flex items-center justify-center gap-2 bg-purple-700 hover:bg-purple-800 text-white font-semibold py-3 rounded-xl transition"
@@ -124,7 +115,6 @@
         </article>
       </div>
 
-      <!-- Pagination -->
       <div
         v-if="totalPages > 1"
         class="flex justify-center items-center gap-2 mt-14 flex-wrap"
@@ -160,7 +150,6 @@
         </button>
       </div>
 
-      <!-- Community Recommendations -->
       <section class="mt-24">
         <div class="text-center mb-12">
           <h2 class="text-3xl font-bold text-gray-900 mb-4">
@@ -175,48 +164,39 @@
 
         <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
           <div class="bg-white border border-gray-200 rounded-2xl p-6">
-            <GraduationCap class="text-purple-700 mb-4" size="28" />
-
-            <h3 class="font-bold text-gray-900 mb-2">Plataformas educativas</h3>
-
+            <Award class="text-purple-700 mb-4" size="28" />
+            <h3 class="font-bold text-gray-900 mb-2">Becas vigentes</h3>
             <p class="text-sm text-gray-600 leading-relaxed">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Encuentra oportunidades de financiamiento y bootcamps aliados.
             </p>
           </div>
 
           <div class="bg-white border border-gray-200 rounded-2xl p-6">
             <BookOpen class="text-purple-700 mb-4" size="28" />
-
-            <h3 class="font-bold text-gray-900 mb-2">Materiales gratuitos</h3>
-
+            <h3 class="font-bold text-gray-900 mb-2">Materiales de estudio</h3>
             <p class="text-sm text-gray-600 leading-relaxed">
-              Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Guías, libros virtuales y repositorios con documentación clave.
             </p>
           </div>
 
           <div class="bg-white border border-gray-200 rounded-2xl p-6">
-            <LinkIcon class="text-purple-700 mb-4" size="28" />
-
-            <h3 class="font-bold text-gray-900 mb-2">Recursos online</h3>
-
+            <Users class="text-purple-700 mb-4" size="28" />
+            <h3 class="font-bold text-gray-900 mb-2">Comunidad activa</h3>
             <p class="text-sm text-gray-600 leading-relaxed">
-              Ut enim ad minim veniam quis nostrud exercitation ullamco.
+              Espacios de networking, iniciativas internas y apoyo mutuo.
             </p>
           </div>
 
           <div class="bg-white border border-gray-200 rounded-2xl p-6">
-            <Award class="text-purple-700 mb-4" size="28" />
-
-            <h3 class="font-bold text-gray-900 mb-2">Becas y oportunidades</h3>
-
+            <HelpCircle class="text-purple-700 mb-4" size="28" />
+            <h3 class="font-bold text-gray-900 mb-2">Otros recursos</h3>
             <p class="text-sm text-gray-600 leading-relaxed">
-              Duis aute irure dolor in reprehenderit in voluptate velit esse.
+              Herramientas diversas y utilidades para tu día a día tech.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- Newsletter -->
       <section class="mt-24">
         <div class="bg-white border border-gray-200 rounded-3xl p-10">
           <div class="max-w-3xl mx-auto text-center">
@@ -254,42 +234,43 @@ import { ref, computed, onMounted, watch } from "vue";
 
 import {
   ExternalLink,
-  GraduationCap,
   Award,
-  Link as LinkIcon,
   BookOpen,
+  Users,
+  HelpCircle,
 } from "lucide-vue-next";
 
-import { fetchResources } from "../utils/api";
+import { getResources } from "../services/resource.service";
 
 const resources = ref([]);
 const loading = ref(true);
-
+const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 const selectedType = ref("all");
 
 const currentPage = ref(1);
 const itemsPerPage = 6;
 
+// Filtros alineados a los nuevos types mapeados en mayúsculas (conforme a la respuesta de la API)
 const resourceTypes = [
   {
     value: "all",
     label: "Todos",
   },
   {
-    value: "course",
-    label: "Cursos",
-  },
-  {
-    value: "scholarship",
+    value: "SCHOLARSHIP",
     label: "Becas",
   },
   {
-    value: "link",
-    label: "Enlaces",
+    value: "MATERIAL",
+    label: "Materiales",
   },
   {
-    value: "material",
-    label: "Materiales",
+    value: "COMMUNITY",
+    label: "Comunidad",
+  },
+  {
+    value: "OTHER",
+    label: "Otros",
   },
 ];
 
@@ -309,7 +290,6 @@ const totalPages = computed(() => {
 
 const paginatedResources = computed(() => {
   const start = (currentPage.value - 1) * itemsPerPage;
-
   const end = start + itemsPerPage;
 
   return filteredResources.value.slice(start, end);
@@ -335,12 +315,13 @@ const nextPage = () => {
   }
 };
 
+// Mapeos en base a strings en mayúsculas de la respuesta del servidor
 const getTypeLabel = (type) => {
   const labels = {
-    course: "Curso",
-    scholarship: "Beca",
-    link: "Enlace",
-    material: "Material",
+    SCHOLARSHIP: "Beca",
+    MATERIAL: "Material",
+    COMMUNITY: "Comunidad",
+    OTHER: "Otro",
   };
 
   return labels[type] || "Recurso";
@@ -348,10 +329,10 @@ const getTypeLabel = (type) => {
 
 const getTypeColor = (type) => {
   const colors = {
-    course: "bg-blue-100 text-blue-700",
-    scholarship: "bg-emerald-100 text-emerald-700",
-    link: "bg-purple-100 text-purple-700",
-    material: "bg-orange-100 text-orange-700",
+    SCHOLARSHIP: "bg-emerald-100 text-emerald-700",
+    MATERIAL: "bg-orange-100 text-orange-700",
+    COMMUNITY: "bg-purple-100 text-purple-700",
+    OTHER: "bg-gray-100 text-gray-700",
   };
 
   return colors[type] || "bg-gray-100 text-gray-700";
@@ -359,18 +340,26 @@ const getTypeColor = (type) => {
 
 const getTypeIcon = (type) => {
   const icons = {
-    course: GraduationCap,
-    scholarship: Award,
-    link: LinkIcon,
-    material: BookOpen,
+    SCHOLARSHIP: Award,
+    MATERIAL: BookOpen,
+    COMMUNITY: Users,
+    OTHER: HelpCircle,
   };
 
-  return icons[type] || LinkIcon;
+  return icons[type] || HelpCircle;
 };
 
 onMounted(async () => {
-  resources.value = await fetchResources();
-  loading.value = false;
+  try {
+    const response = await getResources();
+    // Validamos si la respuesta trae la estructura .data del JSON
+    resources.value =
+      response && response.data ? response.data : response || [];
+  } catch (error) {
+    console.error("Error al cargar los recursos:", error);
+  } finally {
+    loading.value = false;
+  }
 });
 </script>
 
