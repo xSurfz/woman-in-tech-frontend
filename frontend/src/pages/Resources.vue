@@ -57,10 +57,15 @@
           :key="resource.id"
           class="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col"
         >
-          <div class="relative">
+          <div class="relative bg-gray-100">
             <img
-              :src="`${SERVER_URL}${resource.imageUrl}`"
+              :src="
+                resource.imageUrl
+                  ? `${SERVER_URL}${resource.imageUrl}`
+                  : '/placeholder-resource.jpg'
+              "
               :alt="resource.title"
+              @error="(e) => (e.target.src = '/placeholder-resource.jpg')"
               class="w-full h-56 object-cover"
             />
 
@@ -244,13 +249,12 @@ import { getResources } from "../services/resource.service";
 
 const resources = ref([]);
 const loading = ref(true);
-const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+const SERVER_URL = import.meta.env.VITE_SERVER_URL || "";
 const selectedType = ref("all");
 
 const currentPage = ref(1);
 const itemsPerPage = 6;
 
-// Filtros alineados a los nuevos types mapeados en mayúsculas (conforme a la respuesta de la API)
 const resourceTypes = [
   {
     value: "all",
@@ -315,7 +319,6 @@ const nextPage = () => {
   }
 };
 
-// Mapeos en base a strings en mayúsculas de la respuesta del servidor
 const getTypeLabel = (type) => {
   const labels = {
     SCHOLARSHIP: "Beca",
@@ -352,7 +355,6 @@ const getTypeIcon = (type) => {
 onMounted(async () => {
   try {
     const response = await getResources();
-    // Validamos si la respuesta trae la estructura .data del JSON
     resources.value =
       response && response.data ? response.data : response || [];
   } catch (error) {
