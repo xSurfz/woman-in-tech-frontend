@@ -28,7 +28,7 @@ const routes = [
       { path: "about", component: About },
       { path: "events", component: Events },
       { path: "programs", component: Programs },
-      { path: "community", component: Community },
+      // { path: "community", component: Community },
       { path: "resources", component: Resources },
       { path: "testimonials", component: Testimonials },
       { path: "contact", component: Contact },
@@ -38,6 +38,18 @@ const routes = [
     path: "/admin/login",
     component: Login,
     meta: { guestOnly: true },
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    redirect: (to) => {
+      const path = to.path;
+
+      if (path.startsWith("/admin")) {
+        return "/admin";
+      }
+
+      return "/";
+    },
   },
 
   {
@@ -50,8 +62,8 @@ const routes = [
       { path: "programs", component: AdminPrograms },
       { path: "resources", component: AdminResources },
       { path: "testimonials", component: AdminTestimonials },
-      {  path: "interests", component: AdminInterests },
-      {  path: "members", component: AdminMembers },
+      { path: "interests", component: AdminInterests },
+      { path: "members", component: AdminMembers },
     ],
   },
 ];

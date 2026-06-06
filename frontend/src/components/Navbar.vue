@@ -53,7 +53,7 @@ const navLinks = [
   { name: 'Sobre Nosotros', path: '/about' },
   { name: 'Eventos', path: '/events' },
   { name: 'Programas', path: '/programs' },
-  { name: 'Comunidad', path: '/community' },
+  // { name: 'Comunidad', path: '/community' },
   { name: 'Recursos', path: '/resources' },
   { name: 'Testimonios', path: '/testimonials' },
   { name: 'Contacto', path: '/contact' }
