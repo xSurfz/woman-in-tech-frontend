@@ -82,7 +82,7 @@
                 :src="
                   imageStatus[program.id]?.error
                     ? DEFAULT_PLACEHOLDER
-                    : `${SERVER_URL}${program.imageUrl}`
+                    : `${VITE_SERVER_URL}${program.imageUrl}`
                 "
                 :alt="program.title"
                 class="w-full h-full object-cover transition-all duration-500"
@@ -265,7 +265,7 @@
 import { ref, onMounted } from "vue";
 import { getPrograms } from "../services/program.service";
 
-const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+const VITE_SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 // Placeholder SVG limpio y semántico en Base64 para prevenir caídas de red de imágenes
 const DEFAULT_PLACEHOLDER =

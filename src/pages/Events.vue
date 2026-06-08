@@ -82,7 +82,7 @@
                 :src="
                   imageStatus[event.id]?.error
                     ? DEFAULT_PLACEHOLDER
-                    : `${SERVER_URL}${event.imageUrl}`
+                    : `${VITE_SERVER_URL}${event.imageUrl}`
                 "
                 :alt="event.title"
                 class="w-full h-56 object-cover transition-opacity duration-500"
@@ -221,7 +221,7 @@
                 :src="
                   imageStatus[event.id]?.error
                     ? DEFAULT_PLACEHOLDER
-                    : `${SERVER_URL}${event.imageUrl}`
+                    : `${VITE_SERVER_URL}${event.imageUrl}`
                 "
                 :alt="event.title"
                 class="w-full h-56 object-cover grayscale opacity-90 hover:grayscale-0 transition duration-500"
@@ -331,7 +331,7 @@ import { ref, onMounted, computed } from "vue";
 import { Calendar, History, MapPin } from "lucide-vue-next";
 import { getEvents } from "../services/event.service";
 
-const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+const VITE_SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 // URL de un placeholder corporativo limpio en SVG/Base64 en caso de error 404 del backend
 const DEFAULT_PLACEHOLDER =

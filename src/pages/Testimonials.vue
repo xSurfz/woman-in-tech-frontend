@@ -52,7 +52,7 @@
                   <img
                     :src="
                       t.imageUrl
-                        ? `${SERVER_URL}${t.imageUrl}`
+                        ? `${VITE_SERVER_URL}${t.imageUrl}`
                         : 'https://ui-avatars.com/api/?name=' +
                           encodeURIComponent(t.fullName) +
                           '&background=F3E8FF&color=6B21A8'
@@ -100,7 +100,7 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import { Star } from "lucide-vue-next";
 import { getTestimonials } from "../services/testimonial.service";
 
-const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+const VITE_SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 import "swiper/css";
 import "swiper/css/pagination";

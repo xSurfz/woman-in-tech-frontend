@@ -61,7 +61,7 @@
             <img
               :src="
                 resource.imageUrl
-                  ? `${SERVER_URL}${resource.imageUrl}`
+                  ? `${VITE_SERVER_URL}${resource.imageUrl}`
                   : '/placeholder-resource.jpg'
               "
               :alt="resource.title"
@@ -249,7 +249,7 @@ import { getResources } from "../services/resource.service";
 
 const resources = ref([]);
 const loading = ref(true);
-const SERVER_URL = import.meta.env.VITE_SERVER_URL || "";
+const VITE_SERVER_URL = import.meta.env.VITE_SERVER_URL || "";
 const selectedType = ref("all");
 
 const currentPage = ref(1);

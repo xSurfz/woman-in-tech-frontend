@@ -8,7 +8,7 @@ import {
 } from "../../services/admin-member.service.js";
 import { getInterests } from "../../services/admin-interest.service.js";
 
-const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+const VITE_SERVER_URL = import.meta.env.VITE_SERVER_URL;
 const members = ref([]);
 const interests = ref([]);
 const file = ref(null);
