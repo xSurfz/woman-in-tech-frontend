@@ -527,7 +527,7 @@ import {
 } from "../../services/admin-resource.service.js";
 
 // Extracción limpia de la URL de configuración ambiental de Vite
-const SERVER_URL = import.meta.env.VITE_SERVER_URL || "http://localhost:3000";
+const VITE_SERVER_URL = import.meta.env.VITE_SERVER_URL || "http://localhost:3000";
 
 const resources = ref([]);
 
@@ -573,7 +573,7 @@ async function load() {
 // Resuelve la ruta dinámica evitando hardcoding en el cliente
 function getFileUrl(path) {
   if (!path) return "";
-  return `${SERVER_URL}${path}`;
+  return `${VITE_SERVER_URL}${path}`;
 }
 
 function handleFile(event) {

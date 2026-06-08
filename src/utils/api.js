@@ -91,6 +91,6 @@ export async function apiFetch(endpoint, options = {}) {
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: `${import.meta.env.SERVER_URL}/api`,
+  baseURL: `${import.meta.env.VITE_SERVER_URL}/api`,
   withCredentials: true,
 });

@@ -50,7 +50,7 @@
               >
                 <img
                   v-if="leader.imageUrl"
-                  :src="`${SERVER_URL}${leader.imageUrl}`"
+                  :src="`${VITE_SERVER_URL}${leader.imageUrl}`"
                   :alt="leader.fullName"
                   class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
                 />
@@ -111,7 +111,7 @@
               <div class="mb-5 relative">
                 <img
                   v-if="member.imageUrl"
-                  :src="`${SERVER_URL}${member.imageUrl}`"
+                  :src="`${VITE_SERVER_URL}${member.imageUrl}`"
                   :alt="member.fullName"
                   class="w-28 h-28 rounded-full object-cover mx-auto border-4 border-purple-100 bg-gray-100"
                 />
@@ -182,7 +182,7 @@ import { ref, onMounted } from "vue";
 import { getCommunity } from "../services/community.service";
 import { getInterest } from "../services/interest.service"; // IMPLEMENTADO: Importación del servicio
 
-const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+const VITE_SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 const community = ref({
   leaders: [],
